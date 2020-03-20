@@ -14,8 +14,7 @@ jobs:
 
       - name: Git Commit
         run: |
-          cd generated
-          git init
+          git init generated
           git config --local user.name 'Build-Machine'
           git config --local user.email 'wwww3426@naver.com'
           git add *
