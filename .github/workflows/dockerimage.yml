@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Generate Client Code
-        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g typescript -o /client/generated/ts
+        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g typescript-angular -o /client/generated/ts
       
       - name: Git Commit
         run: |
