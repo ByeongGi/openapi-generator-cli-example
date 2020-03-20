@@ -14,8 +14,8 @@ jobs:
       
       - name: Git Commit
       - run: |
-        git config --local user.email 'wwww3426@naver.com;
         git config --local user.name 'Build-Machine'
+        git config --local user.email 'wwww3426@naver.com'
         git commit -m "Add Clinet Generated Code" -a
       
       - name: Push changes
@@ -24,4 +24,4 @@ jobs:
           github_token: ${{ secrets.GIT_TOKEN }}
           branch: go
           directory: /client/generated/go
-          force: true
+          force: truea
