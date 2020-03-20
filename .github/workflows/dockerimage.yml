@@ -13,7 +13,6 @@ jobs:
         run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g go -o /client/generated/go
 
       - name: Git Commit
-        env: 
         run: |
           git init generated
           git config --local user.name 'Build-Machine'
