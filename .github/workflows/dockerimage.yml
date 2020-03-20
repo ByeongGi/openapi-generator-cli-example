@@ -14,13 +14,10 @@ jobs:
       
       - name: Git Commit
         run: |
-          copy generated/go /go
-          git init go
           git config --local user.name 'Build-Machine'
           git config --local user.email 'wwww3426@naver.com'
           git add *
           git commit -m 'Add Clinet Generated Code'
-
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
