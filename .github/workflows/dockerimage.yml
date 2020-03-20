@@ -15,7 +15,7 @@ jobs:
       - name: Git Commit
       - run: |
         git config --local user.email "wwww3426@naver.com"
-        git config --local user.name ""
+        git config --local user.name "Build-Machine"
         git commit -m "Add Clinet Generated Code" -a
       
       - name: Push changes
