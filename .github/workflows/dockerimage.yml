@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  generate-code:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,4 +24,22 @@ jobs:
           github_token: ${{ secrets.GIT_TOKEN }}
           branch: go
           directory: generated/go
+          force: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Client Code
+        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g typescirpt -o /client/generated/ts
+      
+      - name: Git Commit
+        run: |
+          git config --local user.name 'Build-Machine'
+          git config --local user.email 'wwww3426@naver.com'
+          git add *
+          git commit -m 'Add Clinet Generated Code'
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          branch: typescirpt
+          directory: generated/typescirpt
           force: true
