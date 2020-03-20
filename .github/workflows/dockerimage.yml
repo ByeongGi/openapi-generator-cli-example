@@ -18,4 +18,4 @@ jobs:
           git config --local user.email 'wwww3426@naver.com'
           git add *
           git commit -m 'Add Clinet Generated Code'
-          git push https://${{ github.actor }}:${{ secrets.GIT_TOKEN }}@github.com/${{ github.repository }}.git origin go --follow-tags --force
+          git push https://${{ github.actor }}:${{ secrets.GIT_TOKEN }}@github.com/${{ github.repository }}.git origin HEAD:go --follow-tags --force
