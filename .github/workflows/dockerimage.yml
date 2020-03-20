@@ -14,14 +14,11 @@ jobs:
 
       - name: Git Commit
         run: |
+          cd generated
+          git init
           git config --local user.name 'Build-Machine'
           git config --local user.email 'wwww3426@naver.com'
           git add *
           git commit -m 'Add Clinet Generated Code'
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GIT_TOKEN }}
-          branch: go
-          directory: generated/go
-          force: truea
+          git remote set-url origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/${{ github.repository }}
+          git push origin HEAD:go --follow-tags --force
