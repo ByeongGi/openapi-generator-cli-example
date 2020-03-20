@@ -13,11 +13,11 @@ jobs:
         run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g go -o /client/generated/go
 
       - name: Git Commit
-        run: | 
-          ls
+        run: |
           git config --local user.name 'Build-Machine'
           git config --local user.email 'wwww3426@naver.com'
-          git commit -a -m 'Add Clinet Generated Code'
+          git add *
+          git commit -m 'Add Clinet Generated Code'
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
