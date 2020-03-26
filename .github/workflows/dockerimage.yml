@@ -5,12 +5,12 @@ on:
     branches: [master]
 
 jobs:
-  generate-code-go:
+  generate-code-go-client:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Generate Client Code
-        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g go -o /client/generated/go
+        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g go -o /client/generated/go-client
       
       - name: Git Commit
         run: |
@@ -22,15 +22,15 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GIT_TOKEN }}
-          branch: go
-          directory: generated/go
+          branch: go-client
+          directory: generated/go-client
           force: true
-  generate-code-ts:
+  generate-code-angular-client:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Generate Client Code
-        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g typescript-angular -o /client/generated/ts
+        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g typescript-angular -o /client/generated/angular-client
       
       - name: Git Commit
         run: |
@@ -42,6 +42,48 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GIT_TOKEN }}
-          branch: typescript
-          directory: generated/ts
+          branch: angular-client
+          directory: generated/angular-client
+          force: true
+  generate-code-kotlin-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Client Code
+        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g kotlin -o /client/generated/kotlin
+      
+      - name: Git Commit
+        run: |
+          git config --local user.name 'Build-Machine'
+          git config --local user.email 'wwww3426@naver.com'
+          git add *
+          git commit -m 'Add Clinet Generated Code'
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          branch: kotlin
+          directory: generated/kotlin
+          force: true
+
+
+  generate-code-swift5-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Client Code
+        run: docker run --rm -v ${PWD}:/client openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml -g swift5 -o /client/generated/swift5-client
+      
+      - name: Git Commit
+        run: |
+          git config --local user.name 'Build-Machine'
+          git config --local user.email 'wwww3426@naver.com'
+          git add *
+          git commit -m 'Add Clinet Generated Code'
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          branch: swift5-client
+          directory: generated/swift5-client
           force: true
